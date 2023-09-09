@@ -24,11 +24,11 @@ export default function App() {
         <Button title="Add Contact" onPress={addContactHandler} color="green" />
       </View>
       <View style={styles.contactsContainer}>
-        <Text>List of Contacts...</Text>
+        <Text style={styles.listaStyle}>List of Contacts...</Text>
         <FlatList
           data={contacts}
           renderItem={({ item }) => (
-            <View style={styles.contactItem}>
+            <View style={styles.showContact}>
               <Text>{item.name}</Text>
             </View>
           )}
@@ -45,28 +45,36 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   inputContainer: {
-    flex: 1,
+    flex: 2,
     flexDirection: "column",
+    justifyContent:"space-around",
     alignItems: "center",
-    marginBottom: 24,
+    marginBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
   },
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "70%",
+    width: "90%",
     marginRight: 10,
     padding: 10,
+
   },
   contactsContainer: {
     flex: 6,
   },
-  contactItem:{
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-    paddingVertical: 10,
+  showContact:{
+    padding:20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+    borderBottomColor: "black",
     backgroundColor: "#BDECB6"
   },
+  listaStyle:{
+    textAlign: 'center',
+    marginVertical: 8,
+    fontSize:24,
+  }
   
 });
