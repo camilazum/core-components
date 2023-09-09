@@ -1,30 +1,38 @@
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
+import { StyleSheet, Text, TextInput, View, Button, FlatList } from "react-native";
 import React from "react";
 
 export default function App() {
   const [contact, setContact] = React.useState("");
-
-  //TODO: Tip 1 for the assignment 2
-  //const [contacts, setContacts] = React.useState([]);
+  const [contacts, setContacts] = React.useState([]);
 
   const addContactHandler = () => {
-    console.log(contact);
+    if (contact.trim()!=="")
+    {
+      setContacts([...contacts, { name: contact }]);
+      setContact("");}
 
-    //TODO: Tip 2 for the assignment 2
-    //setContacts([...contacts, { name: contact }]);
   };
   return (
     <View style={styles.appContainer}>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder="Contact information"
+          placeholder="Información del Contacto"
           onChangeText={(text) => setContact(text)}
+          value={contact}
         />
-        <Button title="Add Contact" onPress={addContactHandler} />
+        <Button title="Add Contact" onPress={addContactHandler} color="green" />
       </View>
       <View style={styles.contactsContainer}>
         <Text>List of Contacts...</Text>
+        <FlatList
+          data={contacts}
+          renderItem={({ item }) => (
+            <View style={styles.contactItem}>
+              <Text>{item.name}</Text>
+            </View>
+          )}
+        />
       </View>
     </View>
   );
@@ -54,4 +62,11 @@ const styles = StyleSheet.create({
   contactsContainer: {
     flex: 6,
   },
+  contactItem:{
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+    paddingVertical: 10,
+    backgroundColor: "#BDECB6"
+  },
+  
 });
